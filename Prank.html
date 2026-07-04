@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANA - Ambil Saldo Gratis</title>
+    <style>
+        /* Desain Awal Mirip Aplikasi DANA */
+        body {
+            background-color: #0086e6;
+            color: #ffffff;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            transition: all 0.1s ease;
+        }
+        .dana-box {
+            text-align: center;
+            background: #ffffff;
+            color: #333333;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            width: 85%;
+            max-width: 360px;
+        }
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0086e6;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #222;
+        }
+        .hadiah {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f15a24;
+            margin: 15px 0;
+        }
+        .btn-klaim {
+            background-color: #118eea;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(17, 142, 234, 0.4);
+        }
+
+        /* Desain Saat Terkena Prank (Hacker Mode) */
+        .scary-mode {
+            background-color: #000000 !important;
+            animation: flashBackground 0.15s infinite;
+        }
+        .hacker-text {
+            display: none;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
+            text-align: left;
+            width: 90%;
+            height: 80vh;
+            overflow: hidden;
+            line-height: 1.5;
+        }
+        .alert-box {
+            color: #ff0000;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff0000;
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        /* Animasi */
+        @keyframes flashBackground {
+            0%, 100% { background-color: #000000; }
+            50% { background-color: #300000; }
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tampilan Aplikasi DANA Palsu -->
+    <div class="dana-box" id="tampilanAwal">
+        <div class="logo">DANA</div>
+        <div class="title">DANA KAGET SPESIAL</div>
+        <p style="color: #666; font-size: 0.9rem;">Selamat! Akun Anda terpilih menerima saldo langsung cair.</p>
+        <div class="hadiah">Rp 750.000</div>
+        <button class="btn-klaim" onclick="bukaPrank()">BUKA DANA KAGET</button>
+    </div>
+
+    <!-- Tampilan Hacker Layar Penuh -->
+    <div class="hacker-text" id="tampilanPrank">
+        <div class="alert-box">☠️ WARNING: DEVICE COMPROMISED ☠️</div>
+        <div id="logKetik"></div>
+    </div>
+
+    <script>
+        function bukaPrank() {
+            // 1. Aktifkan Fitur Getar HP Korban (Berulang selama 2 detik)
+            if (navigator.vibrate) {
+                navigator.vibrate([500, 200, 500, 200, 500]);
+            }
+
+            // 2. Mainkan Suara Alarm Sirene Polisi/Bahaya secara otomatis
+            let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            setInterval(() => {
+                let osc = audioCtx.createOscillator();
+                let gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(Math.random() * 400 + 400, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.1);
+            }, 150);
+
+            // 3. Ganti Tampilan Layar
+            document.getElementById('tampilanAwal').style.display = 'none';
+            document.body.classList.add('scary-mode');
+            document.getElementById('tampilanPrank').style.display = 'block';
+
+            // 4. Efek Text Log Peretas Berjalan Otomatis
+            const logs = [
+                "[INFO] Connecting to system protocols...",
+                "[SUCCESS] Exploit loaded successfully.",
+                "[WARNING] Accessing private credentials...",
+                "[INFO] Downloading Contacts database...",
+                "[INFO] Extracting WhatsApp Chat history...",
+                "[INFO] Copying Mobile Banking cache...",
+                "[SUCCESS] 4.3 GB Data mirrored to external server.",
+                "[ERROR] SYSTEM LOCKDOWN INITIATED!",
+                "CRITICAL ERROR: DO NOT TURN OFF DEVICE!",
+                "BYPASSING SECURITY...",
+                "[INFO] Erasing Root directories..."
+            ];
+            
+            let baris = 0;
+            function jalankanLog() {
+                if (baris < 100) {
+                    let teksAcak = logs[Math.floor(Math.random() * logs.length)];
+                    document.getElementById('logKetik').innerHTML += teksAcak + "<br>";
+                    baris++;
+                    setTimeout(jalankanLog, 80);
+                }
+            }
+            jalankanLog();
+        }
+    </script>
+
+</body>
+  </html>
+  
